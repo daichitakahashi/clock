@@ -1,33 +1,33 @@
-import { useCallback } from "react";
-import { useDarkMode as useDarkModeValue } from "usehooks-ts";
+import { useEffect } from "react";
+import { useLocalStorage, useMediaQuery } from "usehooks-ts";
+
 import { DarkModePreference } from "./Preference";
 
-export const useDarkMode = () => {
-  const { isDarkMode, enable, disable } = useDarkModeValue();
-  if (isDarkMode) {
+const setDarkMode = (dark: boolean) => {
+  if (dark) {
     document.body.classList.add("dark");
   } else {
     document.body.classList.remove("dark");
   }
-  const updateDarkMode = useCallback(
-    (mode: DarkModePreference) => {
-      switch (true) {
-        case mode === "light" && isDarkMode:
-          disable();
-          break;
-        case mode === "dark" && !isDarkMode:
-          enable();
-          break;
-        case mode === "system":
-          if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-            enable();
-          } else {
-            disable();
-          }
-      }
-    },
-    [isDarkMode, enable, disable],
-  );
-
-  return updateDarkMode;
 };
+
+export function useDarkModePreference(defaultValue: DarkModePreference) {
+  const isSystemDark = useMediaQuery("(prefers-color-scheme: dark)");
+
+  const [darkModePreference, setDarkModePreference] =
+    useLocalStorage<DarkModePreference>("dark-mode", defaultValue);
+
+  useEffect(() => {
+    setDarkMode(
+      (darkModePreference === "system" && isSystemDark) ||
+        darkModePreference === "dark",
+    );
+  }, [darkModePreference, isSystemDark]);
+
+  return {
+    darkModePreference,
+    updateDarkModePreference: (mode: DarkModePreference) => {
+      setDarkModePreference(mode);
+    },
+  };
+}

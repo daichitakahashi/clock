@@ -1,9 +1,12 @@
 import DigitalClock from "./clock/Clock";
 import { Preference } from "./preference/Preference";
-import { useDarkMode } from "./preference/useDarkMode";
+import { useDarkModePreference } from "./preference/useDarkMode";
 
 function App() {
-  const updateDarkMode = useDarkMode();
+  // const updateDarkMode = useDarkMode();
+  const { darkModePreference, updateDarkModePreference } =
+    useDarkModePreference("system");
+
   return (
     <div>
       <div
@@ -25,7 +28,10 @@ function App() {
           top-6
         "
       >
-        <Preference updateDarkMode={updateDarkMode} />
+        <Preference
+          darkMode={darkModePreference}
+          updateDarkMode={updateDarkModePreference}
+        />
       </div>
     </div>
   );

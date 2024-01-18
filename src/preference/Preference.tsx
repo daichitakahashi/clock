@@ -20,13 +20,14 @@ const PreferenceButton: FC = () => (
 export type DarkModePreference = "light" | "dark" | "system";
 
 interface Props {
+  darkMode: DarkModePreference;
   updateDarkMode: (mode: DarkModePreference) => void;
 }
 
-export const Preference: FC<Props> = ({ updateDarkMode }) => {
+export const Preference: FC<Props> = ({ darkMode, updateDarkMode }) => {
   return (
     <Popover.Root>
-      <Popover.Trigger className=" " asChild>
+      <Popover.Trigger asChild>
         <button type="button">
           <PreferenceButton />
         </button>
@@ -49,20 +50,28 @@ export const Preference: FC<Props> = ({ updateDarkMode }) => {
         >
           <div className="font-extrabold text-xl">appearance</div>
           <RadioGroup.Root
-            defaultValue="light"
+            defaultValue={darkMode}
             onValueChange={(v) => {
               updateDarkMode(v as DarkModePreference);
             }}
           >
-            {/* FIXME: default */}
             <div className="flex items-center">
               <RadioGroup.Item
                 id="light"
                 value="light"
                 className="w-4 h-4 rounded-full bg-white dark:bg-black border-black dark:border-white border-[1px]"
               >
-                {/* FIXME: styling */}
-                <RadioGroup.Indicator className="grid place-items-center after:w-2 after:h-2 after:bg-black dark:after:bg-white after:rounded-full" />
+                <RadioGroup.Indicator
+                  className="
+                    grid
+                    place-items-center
+                    after:w-2
+                    after:h-2
+                    after:bg-black
+                    dark:after:bg-white
+                    after:rounded-full
+                  "
+                />
               </RadioGroup.Item>
               <label className="Label" htmlFor="light">
                 light
@@ -77,6 +86,16 @@ export const Preference: FC<Props> = ({ updateDarkMode }) => {
                 <RadioGroup.Indicator className="grid place-items-center after:w-2 after:h-2 after:bg-black dark:after:bg-white after:rounded-full" />
               </RadioGroup.Item>
               <label htmlFor="dark">dark</label>
+            </div>
+            <div className="flex items-center">
+              <RadioGroup.Item
+                id="system"
+                value="system"
+                className="w-4 h-4 rounded-full bg-white dark:bg-black border-black dark:border-white border-[1px]"
+              >
+                <RadioGroup.Indicator className="grid place-items-center after:w-2 after:h-2 after:bg-black dark:after:bg-white after:rounded-full" />
+              </RadioGroup.Item>
+              <label htmlFor="system">system</label>
             </div>
           </RadioGroup.Root>
         </Popover.Content>
