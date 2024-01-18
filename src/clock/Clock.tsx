@@ -1,14 +1,10 @@
 import { FC } from "react";
 import { useClock } from "./useClock";
 
-interface Props {
-  className: string;
-}
-
-const Clock: FC<Props> = ({ className }) => {
+const DigitalClock: FC = () => {
   const time = useClock();
 
-  return <time className={className}>{time.toTimeString()}</time>;
+  return <time className="text-8xl">{time.format("HH:mm:ss")}</time>;
 };
 
-export default Clock;
+export default DigitalClock;

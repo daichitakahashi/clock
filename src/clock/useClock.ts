@@ -1,11 +1,12 @@
+import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 
-export const useClock = (initial = new Date()) => {
+export const useClock = (initial = dayjs()) => {
   const [time, setTime] = useState(initial);
 
   useEffect(() => {
     const id = setInterval(() => {
-      setTime(new Date());
+      setTime(dayjs());
     }, 1000);
     return () => clearInterval(id);
   });
