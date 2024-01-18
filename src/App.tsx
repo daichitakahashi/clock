@@ -1,8 +1,10 @@
+import Clock from "./clock/Clock";
+
 function App() {
   return (
     <>
       <div className="w-[100vw] h-[100vh] grid place-items-center">
-        <div className="text-2xl">Clock</div>
+        <Clock className="text-2xl" />
       </div>
     </>
   );
