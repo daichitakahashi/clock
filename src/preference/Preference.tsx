@@ -55,26 +55,26 @@ export const Preference: FC<Props> = ({ updateDarkMode }) => {
             }}
           >
             {/* FIXME: default */}
-            <div className="flex align-middle">
+            <div className="flex items-center">
               <RadioGroup.Item
                 id="light"
                 value="light"
-                className="w-4 h-4 bg-blue-300"
+                className="w-4 h-4 rounded-full bg-white dark:bg-black border-black dark:border-white border-[1px]"
               >
                 {/* FIXME: styling */}
-                <RadioGroup.Indicator className="w-4 h-4 bg-red-400" />
+                <RadioGroup.Indicator className="grid place-items-center after:w-2 after:h-2 after:bg-black dark:after:bg-white after:rounded-full" />
               </RadioGroup.Item>
               <label className="Label" htmlFor="light">
                 light
               </label>
             </div>
-            <div className="flex align-middle">
+            <div className="flex items-center">
               <RadioGroup.Item
                 id="dark"
                 value="dark"
-                className="w-4 h-4 bg-blue-300"
+                className="w-4 h-4 rounded-full bg-white dark:bg-black border-black dark:border-white border-[1px]"
               >
-                <RadioGroup.Indicator className="w-4 h-4 bg-red-400" />
+                <RadioGroup.Indicator className="grid place-items-center after:w-2 after:h-2 after:bg-black dark:after:bg-white after:rounded-full" />
               </RadioGroup.Item>
               <label htmlFor="dark">dark</label>
             </div>
