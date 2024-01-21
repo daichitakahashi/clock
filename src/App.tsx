@@ -3,7 +3,6 @@ import { Preference } from "./preference/Preference";
 import { useDarkModePreference } from "./preference/useDarkMode";
 
 function App() {
-  // const updateDarkMode = useDarkMode();
   const { darkModePreference, updateDarkModePreference } =
     useDarkModePreference("system");
 
